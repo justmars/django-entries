@@ -6,7 +6,7 @@ Entries is a Django app that has basic create-read-update-delete (CRUD) function
 
 ## CSS
 
-1. `starter.css` [stylesheet](./entries/static/css/starter.css) and some small js packages:
+1. `starter.css` [stylesheet](./entries/static/css/starter.css)
 2. `pylon` 0.1.1 for `<hstack>` and `<vstack>` layouts
 
 ## JS
@@ -17,12 +17,20 @@ Entries is a Django app that has basic create-read-update-delete (CRUD) function
 
 ## Quickstart
 
+Install in your virtual environment:
+
+```zsh
+.venv> pip3 install django-entries # poetry add django-entries
+```
+
+Include package in main project settings file:
+
 ```python
 # in project_folder/settings.py
 INSTALLED_APPS = [
     ...,
-    'crispy_forms',  # crispy_forms at least > v1.13
-    'entries' # new
+    'crispy_forms',  # add crispy_forms at least > v1.13, if not yet added
+    'entries' # this is the new django-entries folder
 ]
 
 # in project_folder/urls.py
@@ -36,5 +44,5 @@ urlpatterns = [
 Add to database:
 
 ```zsh
-.venv> python manage.py migrate # enter virtual environment
+.venv> python manage.py migrate # adds the `Entry` model to the database.
 ```
