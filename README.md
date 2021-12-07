@@ -1,19 +1,16 @@
-# Entries
+# django-entries
 
 ## Overview
 
-Entries is a Django app that has basic create-read-update-delete (CRUD) functionality for an `Entry` model with `title`, `excerpt`,`content` and `author` fields. The base [template](./entries/templates/base.html) makes use of light css and javascript.
+Basic create-read-update-delete (CRUD) functionality for an `Entry` model.
 
-## CSS
+The base [template](./entries/templates/base.html) makes use of light css and javascript:
 
 1. `starter.css` [stylesheet](./entries/static/css/starter.css)
 2. `pylon` 0.1.1 for `<hstack>` and `<vstack>` layouts
-
-## JS
-
-1. `htmx` 1.6.1 for html-over-the-wire functionality
-2. `hyperscript` 0.9 for client-side reactivity
-3. `simplemde` a simple markdown editor
+3. `htmx` 1.6.1 for html-over-the-wire functionality
+4. `hyperscript` 0.9 for client-side reactivity
+5. `simplemde` a simple markdown editor
 
 ## Quickstart
 
