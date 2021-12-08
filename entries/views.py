@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage, Paginator
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
@@ -14,7 +14,7 @@ EDITOR = "entries/entry_edit.html"
 DETAIL = "entries/entry_detail.html"
 FIRST_PAGE = "entries/entry_list.html"
 NEXT_PAGE = "entries/entry_next.html"
-ITEM_IN_PAGE = "entries/entry_list_item.html"
+ITEM_IN_PAGE = "entries/entry_item.html"
 MAX_ITEMS_PER_PAGE = 2
 
 
@@ -28,14 +28,8 @@ def edit_entry(request: HttpRequest, slug: str) -> TemplateResponse:
             if form.has_changed():
                 form.save()
         return redirect(entry.get_absolute_url())
-    return TemplateResponse(
-        request,
-        EDITOR,
-        {
-            "form": form,
-            "edit_header": f"Update {entry.title}",
-        },
-    )
+    context = {"form": form, "edit_header": f"Update {entry.title}"}
+    return TemplateResponse(request, EDITOR, context)
 
 
 @login_required
@@ -47,14 +41,8 @@ def add_entry(request: HttpRequest) -> TemplateResponse:
         entry.author = request.user
         entry.save()
         return redirect(entry.get_absolute_url())
-    return TemplateResponse(
-        request,
-        EDITOR,
-        {
-            "form": form,
-            "edit_header": "Write An Entry",
-        },
-    )
+    context = {"form": form, "edit_header": "Write An Entry"}
+    return TemplateResponse(request, EDITOR, context)
 
 
 @login_required
@@ -73,14 +61,21 @@ def view_entry(request: HttpRequest, slug: str) -> TemplateResponse:
 
 
 def set_context(request: HttpRequest, loader: str) -> TemplateResponse:
-    qs = Entry.objects.all().order_by("created")
+    qs = Entry.objects.all()
     paginator = Paginator(qs, MAX_ITEMS_PER_PAGE)
-    page_number = request.GET.get("next", 1)
-    context = {
-        "page_obj": paginator.get_page(page_number),
-        "template_for_item": ITEM_IN_PAGE,
-        "get_next_page_url": reverse("entries:scroll_entries"),
-    }
+    page_number = request.GET.get("next", 1)  # get next from url, else page 1
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj": page_obj, "template_for_item": ITEM_IN_PAGE}
+
+    next_num = None
+    if page_obj.has_next:
+        try:
+            next_num = page_obj.next_page_number()
+        except EmptyPage:
+            next_num = None
+    if next_num:  # adds next page to url for infinity scrolling
+        base_route = reverse("entries:scroll_entries")
+        context["next_page_url"] = f"{base_route}?next={next_num}"
     return TemplateResponse(request, loader, context)
 
 

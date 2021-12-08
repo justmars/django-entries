@@ -47,10 +47,19 @@ Add to database:
 .venv> python manage.py createsuperuser # (optional: if fresh project install)
 ```
 
-Run server and login to admin then logout:
+Login to add:
 
-1. Run `python manage.py runserver`
-2. Visit `http://127.0.0.1:8000/entry/entries/list` assumes _entry_ as main folder in in `project_folder/urls.py`
-3. There is no option to add a new blog since only logged in users are permitted.
-4. Authentication is not part of this package so login via `http://127.0.0.1:8000/admin/` via created superuser
-5. Visit `http://127.0.0.1:8000/entry/entries/list` again to see the `Add entry` button.
+```zsh
+.venv> `python manage.py runserver`
+# Visit http://127.0.0.1:8000/entry/entries/list
+# Assumes _entry_ as folder in config/urls.py
+# The `Add entry` button is only visible to logged in users.
+# Can login via admin using the superuser account http://127.0.0.1:8000/admin/
+# Visit the list page again at http://127.0.0.1:8000/entry/entries/list to see the `Add entry` button.
+```
+
+## Test
+
+```zsh
+.venv> pytest --ds=config.settings --cov
+```

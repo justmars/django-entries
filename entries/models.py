@@ -35,6 +35,7 @@ class Entry(TimeStampedModel):
     )
 
     class Meta:
+        ordering = ["-created"]
         verbose_name = "Entry"
         verbose_name_plural = "Entries"
 
