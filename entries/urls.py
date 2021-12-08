@@ -5,12 +5,14 @@ from .views import (
     delete_entry,
     edit_entry,
     list_entries,
+    scroll_entries,
     view_about,
     view_entry,
 )
 
 app_name = "entries"
 urlpatterns = [
+    path("entries/scroll", scroll_entries, name="scroll_entries"),
     path("entries/list", list_entries, name="list_entries"),
     path("create/add", add_entry, name="add_entry"),
     path("edit/<slug:slug>", edit_entry, name="edit_entry"),

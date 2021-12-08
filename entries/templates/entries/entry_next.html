@@ -1,0 +1,18 @@
+<div id="objects-in-page">
+    {% for result in page_obj %}
+        {% if forloop.last %}
+            {% if page_obj.has_next %}
+                <div
+                    hx-get="{{get_next_page_url}}?next={{page_obj.next_page_number}}"
+                    hx-trigger="revealed"
+                    hx-target="#objects-in-page"
+                    hx-swap="beforeend"
+                >
+                </div>
+            {% endif %}
+        {% endif %}
+        {% include template_for_item with entry=result %}
+    {% endfor %}
+</div>
+
+
