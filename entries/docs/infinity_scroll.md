@@ -6,7 +6,7 @@ Through django's [pagination](https://docs.djangoproject.com/en/4.0/topics/pagin
 
 The first page holds a fixed number of model instances to be displayed.
 
-When the last item in page one is `revealed` in the browser's DOM by scrolling, a [htmx](https://htmx.org/examples/infinite-scroll/) can send a get request to the original view, pulling page two.
+When the last item in page one is `revealed` in the browser's DOM by scrolling, [htmx](https://htmx.org/examples/infinite-scroll/) can send a GET request to the original view, pulling page two.
 
 Rinse and repeat until the view finds no subsequent page number.
 
