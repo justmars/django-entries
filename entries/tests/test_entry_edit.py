@@ -6,6 +6,8 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
 
+from entries.views import EDITOR
+
 ENDPOINT = lambda x: f"/entry/edit/{x}"
 ROUTE = lambda x: reverse("entries:edit_entry", kwargs={"slug": x})
 
@@ -38,7 +40,7 @@ def test_edit_entry_get_authenticated(
     response = client.get(url)
     assert isinstance(response, TemplateResponse)
     assert HTTPStatus.OK == response.status_code
-    assert "entry_edit.html" == response.template_name
+    assert EDITOR == response.template_name
 
 
 @pytest.mark.parametrize("formatter", [ENDPOINT, ROUTE])

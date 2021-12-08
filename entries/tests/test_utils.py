@@ -27,7 +27,7 @@ def test_script_tag_stripped(test_entry):
     "named_route, template_name",
     [
         ("entries:view_about", "about.html"),
-        ("entries:list_entries", "entry_list.html"),
+        ("entries:list_entries", "entries/entry_list.html"),
     ],
 )
 def test_ok_entry_views(client, named_route, template_name):
