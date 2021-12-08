@@ -5,6 +5,8 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
 
+from entries.views import EDITOR
+
 ENDPOINT = "/entry/create/add"
 ROUTE = reverse("entries:add_entry")
 
@@ -22,7 +24,7 @@ def test_add_entry_get_authenticated(client, sample_user, url):
     response = client.get(url)
     assert isinstance(response, TemplateResponse)
     assert HTTPStatus.OK == response.status_code
-    assert "entry_edit.html" == response.template_name
+    assert EDITOR == response.template_name
 
 
 @pytest.mark.django_db

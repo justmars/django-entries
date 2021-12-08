@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{% if entry.meta %}
-    {{ entry.meta }}
+{% if metadata %}
+    {{ metadata }}
 {% else %}
     <meta name="description" content="Sample description "> <!-- # Customize content for search -->
     {% block title %}<title>Test site sample</title> {% endblock title %}<!-- Enable title changes -->

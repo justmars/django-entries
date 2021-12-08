@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>{{edit_header|title}}</h1>
-    <main>{% include '_form.html' %}</main>
+    <main>{% include 'entries/_form.html' %}</main>
 {% endblock content %}
 
 {% block extra_js %}<script type="text/javascript">var simplemde = new SimpleMDE({forceSync: true});</script>{% endblock extra_js %}

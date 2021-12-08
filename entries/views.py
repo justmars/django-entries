@@ -9,6 +9,8 @@ from django.views.decorators.http import require_http_methods
 from .forms import EntryForm
 from .models import Entry
 
+EDITOR = "entries/entry_edit.html"
+
 
 @login_required
 def edit_entry(request: HttpRequest, slug: str) -> TemplateResponse:
@@ -21,7 +23,7 @@ def edit_entry(request: HttpRequest, slug: str) -> TemplateResponse:
         return redirect(entry.get_absolute_url())
     return TemplateResponse(
         request,
-        "entry_edit.html",
+        EDITOR,
         {
             "form": form,
             "edit_header": f"Update {entry.title}",
@@ -40,7 +42,7 @@ def add_entry(request: HttpRequest) -> TemplateResponse:
         return redirect(entry.get_absolute_url())
     return TemplateResponse(
         request,
-        "entry_edit.html",
+        EDITOR,
         {
             "form": form,
             "edit_header": "Write An Entry",
@@ -68,7 +70,7 @@ def view_entry(request: HttpRequest, slug: str) -> TemplateResponse:
 
 def list_entries(request: HttpRequest) -> TemplateResponse:
     return TemplateResponse(
-        request, "entry_list.html", {"entries": Entry.objects.all()}
+        request, "entries/entry_list.html", {"entries": Entry.objects.all()}
     )
 
 

@@ -31,10 +31,12 @@ INSTALLED_APPS = [
 ]
 
 # in project_folder/urls.py
+from django.views.generic import TemplateView
 from django.urls import path, include # new
 urlpatterns = [
     ...,
     path('entry/', include('entries.urls')) # new
+    path("", TemplateView.as_view(template_name="home.html")), # (optional: if fresh project install)
 ]
 ```
 
@@ -42,4 +44,13 @@ Add to database:
 
 ```zsh
 .venv> python manage.py migrate # adds the `Entry` model to the database.
+.venv> python manage.py createsuperuser # (optional: if fresh project install)
 ```
+
+Run server and login to admin then logout:
+
+1. Run `python manage.py runserver`
+2. Visit `http://127.0.0.1:8000/entry/entries/list` assumes _entry_ as main folder in in `project_folder/urls.py`
+3. There is no option to add a new blog since only logged in users are permitted.
+4. Authentication is not part of this package so login via `http://127.0.0.1:8000/admin/` via created superuser
+5. Visit `http://127.0.0.1:8000/entry/entries/list` again to see the `Add entry` button.
