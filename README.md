@@ -8,7 +8,7 @@ The base [template](./entries/templates/base.html) makes use of light css and ja
 
 1. `starter.css` [stylesheet](./entries/static/css/starter.css)
 2. `pylon` 0.1.1 for `<hstack>` and `<vstack>` layouts
-3. `htmx` 1.6.1 for html-over-the-wire functionality
+3. `htmx` 1.6.1 for html-over-the-wire functionality, e.g. [infinite scrolling](./entries/docs/infinity_scroll.md)
 4. `hyperscript` 0.9 for client-side reactivity
 5. `simplemde` a simple markdown editor
 
