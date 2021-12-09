@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, Paginator
+from django.db.models import Q
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
@@ -56,26 +57,47 @@ def delete_entry(request: HttpRequest, slug: str) -> HttpResponse:
 
 
 def view_entry(request: HttpRequest, slug: str) -> TemplateResponse:
-    context = {"entry": get_object_or_404(Entry, slug=slug)}
+    entry = get_object_or_404(Entry, slug=slug)
+    context = {"entry": entry, "metadata": entry.meta}
     return TemplateResponse(request, DETAIL, context)
 
 
 def set_context(request: HttpRequest, loader: str) -> TemplateResponse:
-    qs = Entry.objects.all()
-    paginator = Paginator(qs, MAX_ITEMS_PER_PAGE)
-    page_number = request.GET.get("next", 1)  # get next from url, else page 1
-    page_obj = paginator.get_page(page_number)
-    context = {"page_obj": page_obj, "template_for_item": ITEM_IN_PAGE}
+    """Add to the `url` from the `request` object's `q` and `next` parameters, if present."""
 
+    # initialize
+    context = {}
+    context["template_for_item"] = ITEM_IN_PAGE  # template for each page item
+    url = reverse("entries:scroll_entries")  # base url for infinity scrolling
+    query = request.GET.get("q", None)  # get query from url, else None
+    page_number = request.GET.get("next", 1)  # get next from url, else page 1
+
+    # adds to base and filters queryset, if query available; else default
+    qs = Entry.objects.all()
+    if query:
+        url = f"{url}?q={query}"
+        qs = qs.filter(
+            Q(title__icontains=query)
+            | Q(excerpt__icontains=query)
+            | Q(content__icontains=query)
+        )
+
+    # set page from request
+    paginator = Paginator(qs, MAX_ITEMS_PER_PAGE)
+    page_obj = paginator.get_page(page_number)
+    context["page_obj"] = page_obj
+
+    # adds to base, if next page available
     next_num = None
     if page_obj.has_next:
         try:
             next_num = page_obj.next_page_number()
         except EmptyPage:
             next_num = None
-    if next_num:  # adds next page to url for infinity scrolling
-        base_route = reverse("entries:scroll_entries")
-        context["next_page_url"] = f"{base_route}?next={next_num}"
+    if next_num:
+        context["next_page_url"] = f"{url}?next={next_num}"
+
+    # return html fragment to the template loader
     return TemplateResponse(request, loader, context)
 
 
