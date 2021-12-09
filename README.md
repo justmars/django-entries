@@ -35,7 +35,7 @@ from django.views.generic import TemplateView
 from django.urls import path, include # new
 urlpatterns = [
     ...,
-    path('entry/', include('entries.urls')) # new
+    path('entry/', include('entries.urls')), # new
     path("", TemplateView.as_view(template_name="home.html")), # (optional: if fresh project install)
 ]
 ```
