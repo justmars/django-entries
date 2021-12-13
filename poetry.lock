@@ -148,7 +148,7 @@ toml = ["tomli"]
 
 [[package]]
 name = "distlib"
-version = "0.3.3"
+version = "0.3.4"
 description = "Distribution utilities"
 category = "dev"
 optional = false
@@ -268,7 +268,7 @@ testing = ["coverage", "pyyaml"]
 
 [[package]]
 name = "markdownify"
-version = "0.10.0"
+version = "0.10.1"
 description = "Convert HTML to markdown."
 category = "main"
 optional = false
@@ -674,8 +674,8 @@ coverage = [
     {file = "coverage-6.2.tar.gz", hash = "sha256:e2cad8093172b7d1595b4ad66f24270808658e11acf43a8f95b41276162eb5b8"},
 ]
 distlib = [
-    {file = "distlib-0.3.3-py2.py3-none-any.whl", hash = "sha256:c8b54e8454e5bf6237cc84c20e8264c3e991e824ef27e8f1e81049867d861e31"},
-    {file = "distlib-0.3.3.zip", hash = "sha256:d982d0751ff6eaaab5e2ec8e691d949ee80eddf01a62eaa96ddb11531fe16b05"},
+    {file = "distlib-0.3.4-py2.py3-none-any.whl", hash = "sha256:6564fe0a8f51e734df6333d08b8b94d4ea8ee6b99b5ed50613f731fd4089f34b"},
+    {file = "distlib-0.3.4.zip", hash = "sha256:e4b58818180336dc9c529bfb9a0b58728ffc09ad92027a3f30b7cd91e3458579"},
 ]
 django = [
     {file = "Django-4.0-py3-none-any.whl", hash = "sha256:59304646ebc6a77b9b6a59adc67d51ecb03c5e3d63ed1f14c909cdfda84e8010"},
@@ -714,8 +714,8 @@ markdown = [
     {file = "Markdown-3.3.6.tar.gz", hash = "sha256:76df8ae32294ec39dcf89340382882dfa12975f87f45c3ed1ecdb1e8cefc7006"},
 ]
 markdownify = [
-    {file = "markdownify-0.10.0-py3-none-any.whl", hash = "sha256:4b26e2ed7c1113efdf4faa5b31f67ac101dd0c1770979c21e34b20b95a99ef8c"},
-    {file = "markdownify-0.10.0.tar.gz", hash = "sha256:ba7a5eb2a278ef216d77e5abdf4274e8fd816f9a7e80de6a5fb441fada52eaf3"},
+    {file = "markdownify-0.10.1-py3-none-any.whl", hash = "sha256:4458aa5494a4b435edce67c6e2d6807028b0a1861b63dd780172e57f89d878df"},
+    {file = "markdownify-0.10.1.tar.gz", hash = "sha256:821ffdaec75ce6be6eb5006bd4faaa54bf55283e389e7cde5b2fca849fce5b57"},
 ]
 mypy = [
     {file = "mypy-0.902-cp35-cp35m-macosx_10_9_x86_64.whl", hash = "sha256:3f12705eabdd274b98f676e3e5a89f247ea86dc1af48a2d5a2b080abac4e1243"},
