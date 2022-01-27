@@ -61,5 +61,5 @@ Login to add:
 ## Test
 
 ```zsh
-.venv> pytest --ds=config.settings --cov
+.venv> pytest
 ```

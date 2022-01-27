@@ -42,8 +42,9 @@ def add_entry(request: HttpRequest) -> TemplateResponse:
         entry.author = request.user
         entry.save()
         return redirect(entry.get_absolute_url())
-    context = {"form": form, "edit_header": "Write An Entry"}
-    return TemplateResponse(request, EDITOR, context)
+    return TemplateResponse(
+        request, EDITOR, {"form": form, "edit_header": "Write An Entry"}
+    )
 
 
 @login_required
@@ -57,9 +58,9 @@ def delete_entry(request: HttpRequest, slug: str) -> HttpResponse:
 
 
 def view_entry(request: HttpRequest, slug: str) -> TemplateResponse:
-    entry = get_object_or_404(Entry, slug=slug)
-    context = {"entry": entry, "metadata": entry.meta}
-    return TemplateResponse(request, DETAIL, context)
+    return TemplateResponse(
+        request, DETAIL, {"entry": get_object_or_404(Entry, slug=slug)}
+    )
 
 
 def set_context(request: HttpRequest, loader: str) -> TemplateResponse:

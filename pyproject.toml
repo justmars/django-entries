@@ -14,7 +14,7 @@ packages = [
 python = "^3.8" # mandatory
 Django = "^4.0"
 django-extensions = "^3.1.5" # model / field helpers
-django-crispy-forms = "^1.13.0" # server-side rendering
+django-crispy-forms = "^1.14.0" # server-side rendering
 markdownify = "^0.10.0" # html to md
 Markdown = "^3.3.6" # md to html
 types-Markdown = "^3.3.8"
@@ -31,7 +31,6 @@ mypy = "^0.930"
 black = "^21.12b0"
 isort = "^5.10.1"
 pre-commit = "^2.17.0"
-
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings" # depends on project root

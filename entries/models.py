@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
 from django.db import models
 from django.shortcuts import get_object_or_404
-from django.template import Context, Template
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django_extensions.db.fields import AutoSlugField
@@ -44,24 +43,6 @@ class Entry(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("entries:view_entry", kwargs={"slug": self.slug})
-
-    @property
-    def meta(self):
-        data = {
-            "title": self.title,
-            "description": self.excerpt,
-            "url": self.get_absolute_url(),
-        }
-        html = """
-            <title>{{title}}</title>
-            <meta property="og:title" content="{{title}}">
-            <meta name="description" property="og:description" content="{{description|striptags|truncatewords:20}}">
-            <meta property="og:url" content="{{url}}">
-            <meta property="og:type" content="blog">
-        """
-        context = Context(data)
-        template = Template(html)
-        return mark_safe(template.render(context))
 
     @property
     def md_content(self) -> str:
