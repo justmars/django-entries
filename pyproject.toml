@@ -1,11 +1,10 @@
 [tool.poetry]
 name = "django-entries"
 version = "0.1.12"
-description = "Entries is a helper Django app with CRUD functions based on htmx."
+description = "Entries is a helper Django app, CRUD."
 authors = ["Marcelino G. Veloso III <mars@veloso.one>"]
 readme = "README.md"
 repository = "https://github.com/justmars/django-entries"
-license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -30,13 +29,12 @@ types-Markdown = "^3.3.8"
 
 [tool.pytest.ini_options]
 minversion = "7.2"
-pythonpath = "src" # enable pytest in root directly
 addopts = "-ra -q --ds=config.settings --doctest-modules --cov"
 filterwarnings = [
     "ignore::DeprecationWarning",                                # DeprecationWarning: pkg_resources is deprecated as an API
     "ignore::django.utils.deprecation.RemovedInDjango51Warning", # GET_STORAGE_CLASS_DEPRECATED_MSG
 ]
-testpaths = ["tests", "src"]
+testpaths = ["tests"]
 
 [tool.ruff]
 ignore = ["F401", "F403"]
@@ -44,5 +42,5 @@ fixable = ["F", "E", "W", "I001"]
 select = ["F", "E", "W", "I001"]
 
 [build-system]
-requires = ["poetry-core>=1.1.12"]
+requires = ["poetry-core>=1.4.2"]
 build-backend = "poetry.core.masonry.api"
