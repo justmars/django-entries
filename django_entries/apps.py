@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class EntriesConfig(AppConfig):
+class DjangoEntriesConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "entries"
+    name = "django_entries"

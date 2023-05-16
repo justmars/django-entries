@@ -1,7 +1,7 @@
 import pytest
 from markdownify import markdownify as md
 
-from entries.models import Entry
+from django_entries.models import Entry
 
 
 @pytest.fixture

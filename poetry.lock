@@ -1874,25 +1874,7 @@ files = [
     {file = "webencodings-0.5.1.tar.gz", hash = "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"},
 ]
 
-[[package]]
-name = "werkzeug"
-version = "2.3.4"
-description = "The comprehensive WSGI web application library."
-category = "dev"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "Werkzeug-2.3.4-py3-none-any.whl", hash = "sha256:48e5e61472fee0ddee27ebad085614ebedb7af41e88f687aaf881afb723a162f"},
-    {file = "Werkzeug-2.3.4.tar.gz", hash = "sha256:1d5a58e0377d1fe39d061a5de4469e414e78ccb1e1e59c0f5ad6fa1c36c52b76"},
-]
-
-[package.dependencies]
-MarkupSafe = ">=2.1.1"
-
-[package.extras]
-watchdog = ["watchdog (>=2.3)"]
-
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "39435c3a119113460fef2ddd765d5913a89a76daed7fd5e9ec85d39c67a9e7c7"
+content-hash = "ed221e7da7f62b7565d9829a94a5092b08c293c330f2132b69315b4772132b18"

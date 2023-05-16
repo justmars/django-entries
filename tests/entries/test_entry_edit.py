@@ -6,7 +6,7 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
 
-from entries.views import EDITOR
+from django_entries.views import EDITOR
 
 
 def ENDPOINT(x):

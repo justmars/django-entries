@@ -1,6 +1,6 @@
 import pytest
 
-from entries.forms import EntryForm
+from django_entries.forms import EntryForm
 
 
 def START_WITH_UPPER(x):

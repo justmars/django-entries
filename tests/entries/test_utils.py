@@ -4,7 +4,7 @@ import pytest
 from django.urls import reverse
 from markdownify import markdownify as md
 
-from entries.utils import convert_md_to_html
+from django_entries.utils import convert_md_to_html
 
 
 def test_script_tag_allowed_in_entry(test_entry):
