@@ -24,7 +24,7 @@ Include package in main project settings file:
 
 ```python
 # in project_folder/settings.py
-INSTALLED_APPS = [..., "entries"]  # this is the new django-entries folder
+INSTALLED_APPS = [..., "django_entries"]  # this is the new django-entries folder
 
 # in project_folder/urls.py
 from django.views.generic import TemplateView
@@ -32,7 +32,7 @@ from django.urls import path, include  # new
 
 urlpatterns = [
     ...,
-    path("entry/", include("entries.urls")),  # new
+    path("entry/", include("django_entries.urls")),  # new
     path(
         "", TemplateView.as_view(template_name="home.html")
     ),  # (optional: if fresh project install)
