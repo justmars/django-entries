@@ -4,7 +4,7 @@
         "strings": true
     },
     "python.testing.pytestArgs": [
-        "${workspaceFolder}/src", // without this, pytest discovery error
+        "${workspaceFolder}", // without this, pytest discovery error
         "--ds=config.settings", // see pytest django
         "--doctest-modules",
         "--exitfirst",

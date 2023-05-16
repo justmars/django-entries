@@ -60,7 +60,7 @@ def sample_excerpt():
 
 @pytest.fixture
 def sample_md_bad_tag():
-    return """# This is a header script\r\n\r\n<script type="text/javascript">test</script>"""
+    return """# This is a header script\r\n\r\n<script type="text/javascript">test</script>"""  # noqa: E501
 
 
 @pytest.fixture

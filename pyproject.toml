@@ -14,7 +14,6 @@ packages = [
 python = "^3.11"
 Django = "^4.2"
 django-extensions = "^3.2"
-django-crispy-forms = "^2.0"
 markdownify = "^0.10"
 Markdown = "^3.3.6"
 bleach = "^4.1.0"

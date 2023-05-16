@@ -2,7 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, Paginator
 from django.db.models import Q
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse
+from django.http.response import (
+    HttpResponse,
+    HttpResponsePermanentRedirect,
+    HttpResponseRedirect,
+)
 from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
@@ -20,30 +24,41 @@ MAX_ITEMS_PER_PAGE = 2
 
 
 @login_required
-def edit_entry(request: HttpRequest, slug: str) -> TemplateResponse:
+def edit_entry(
+    request: HttpRequest, slug: str
+) -> TemplateResponse | HttpResponseRedirect | HttpResponsePermanentRedirect:
     entry = Entry.get_for_user(slug, request.user)
-    url = reverse("entries:edit_entry", kwargs={"slug": slug})
-    form = EntryForm(request.POST or None, instance=entry, submit_url=url)
+    form = EntryForm(request.POST or None, instance=entry)
     if request.method == "POST":
         if form.is_valid():
             if form.has_changed():
                 form.save()
-        return redirect(entry.get_absolute_url())
-    context = {"form": form, "edit_header": f"Update {entry.title}"}
-    return TemplateResponse(request, EDITOR, context)
+        return redirect(to=entry.get_absolute_url())
+    return TemplateResponse(
+        request,
+        EDITOR,
+        {
+            "form": form,
+            "edit_header": f"Update {entry.title}",
+            "mode": "edit",
+            "slug": slug,
+        },
+    )
 
 
 @login_required
-def add_entry(request: HttpRequest) -> TemplateResponse:
-    url = reverse("entries:add_entry")
-    form = EntryForm(request.POST or None, submit_url=url)
-    if request.method == "POST" and form.is_valid():
-        entry = form.save(commit=False)
-        entry.author = request.user
-        entry.save()
-        return redirect(entry.get_absolute_url())
+def add_entry(
+    request: HttpRequest,
+) -> TemplateResponse | HttpResponseRedirect | HttpResponsePermanentRedirect:
+    form = EntryForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            entry = form.save(commit=False)
+            entry.author = request.user
+            entry.save()
+            return redirect(to=entry.get_absolute_url())
     return TemplateResponse(
-        request, EDITOR, {"form": form, "edit_header": "Write An Entry"}
+        request, EDITOR, {"form": form, "edit_header": "Write An Entry", "mode": "add"}
     )
 
 
@@ -64,7 +79,16 @@ def view_entry(request: HttpRequest, slug: str) -> TemplateResponse:
 
 
 def set_context(request: HttpRequest, loader: str) -> TemplateResponse:
-    """Add to the `url` from the `request` object's `q` and `next` parameters, if present."""
+    """Add to the `url` from the `request` object's `q` and `next`
+    parameters, if present.
+
+    Args:
+        request (HttpRequest): _description_
+        loader (str): _description_
+
+    Returns:
+        TemplateResponse: _description_
+    """
 
     # initialize
     context = {}

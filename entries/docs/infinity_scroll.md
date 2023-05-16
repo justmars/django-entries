@@ -78,7 +78,9 @@ Add the two views above to the urlpatterns
 ```python
 # entries/urls.py
 urlpatterns = [
-    path("entries/scroll", scroll_entries, name="scroll_entries"), # note the reverse function declared in the context above
+    path(
+        "entries/scroll", scroll_entries, name="scroll_entries"
+    ),  # note the reverse function declared in the context above
     path("entries/list", list_entries, name="list_entries"),
 ]
 ```

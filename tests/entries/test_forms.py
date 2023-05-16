@@ -2,8 +2,15 @@ import pytest
 
 from entries.forms import EntryForm
 
-START_WITH_UPPER = lambda x: f"{x} should start with an uppercase letter"
-NO_AMPERSAND = lambda x: f"{x} should use 'and' instead of '&'"
+
+def START_WITH_UPPER(x):
+    return f"{x} should start with an uppercase letter"
+
+
+def NO_AMPERSAND(x):
+    return f"{x} should use 'and' instead of '&'"
+
+
 BAD_TAG = '<script type="text/javascript">'
 
 

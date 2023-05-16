@@ -44,8 +44,4 @@ jobs:
       - name: Install Python Dependencies
         run: poetry install
       - name: Pytest via Sqlite Database Engine
-        env:
-          DATABASE_URL: 'sqlite:///testdb.sqlite'
         run: poetry run pytest --ds=config.settings
-        working-directory: ./src
-

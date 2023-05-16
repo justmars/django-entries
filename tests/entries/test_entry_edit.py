@@ -8,8 +8,13 @@ from django.urls import reverse
 
 from entries.views import EDITOR
 
-ENDPOINT = lambda x: f"/entry/edit/{x}"
-ROUTE = lambda x: reverse("entries:edit_entry", kwargs={"slug": x})
+
+def ENDPOINT(x):
+    return f"/entry/edit/{x}"
+
+
+def ROUTE(x):
+    return reverse("entries:edit_entry", kwargs={"slug": x})
 
 
 @pytest.mark.parametrize("formatter", [ENDPOINT, ROUTE])
@@ -32,9 +37,7 @@ def test_edit_entry_forbidden_even_if_authenticated(
 
 
 @pytest.mark.parametrize("formatter", [ENDPOINT, ROUTE])
-def test_edit_entry_get_authenticated(
-    client, sample_user, test_entry, formatter
-):
+def test_edit_entry_get_authenticated(client, sample_user, test_entry, formatter):
     client.force_login(sample_user)
     url = formatter(test_entry.slug)
     response = client.get(url)

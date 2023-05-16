@@ -5,8 +5,15 @@ from django.core.exceptions import PermissionDenied
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 
-ENDPOINT = lambda x: f"/entry/delete/{x}"
-ROUTE = lambda x: reverse("entries:delete_entry", kwargs={"slug": x})
+
+def ENDPOINT(x):
+    return f"/entry/delete/{x}"
+
+
+def ROUTE(x):
+    return reverse("entries:delete_entry", kwargs={"slug": x})
+
+
 LIST_URL = reverse("entries:list_entries")
 
 

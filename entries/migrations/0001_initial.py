@@ -10,7 +10,6 @@ import entries.validators
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -61,7 +60,9 @@ class Migration(migrations.Migration):
                 (
                     "excerpt",
                     models.CharField(
-                        help_text="Short blurb describing entry displayed in list of entries.",
+                        help_text=(
+                            "Short blurb describing entry displayed in list of entries."
+                        ),
                         max_length=50,
                         validators=[
                             entries.validators.validate_capitalized,
