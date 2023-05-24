@@ -19,7 +19,11 @@ def test_script_tag_removed_by_function(sample_md_bad_tag):
 
 def test_script_tag_stripped(test_entry):
     html = convert_md_to_html(test_entry.content)
-    assert html == "<h1>This is a header script</h1>\n<p>test</p>"
+    assert (
+        html
+        == """<div><h1 id="this-is-a-header-script">This is a header script</h1>
+<p>test</p></div>"""
+    )
 
 
 @pytest.mark.django_db
